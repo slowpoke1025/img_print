@@ -6,6 +6,7 @@ const papers = document.getElementsByClassName("paper");
 const container = document.querySelector(".paper-container");
 const hidden_container = document.querySelector("#hidden-paper-container");
 const input = document.getElementById("file-upload");
+const loader = document.querySelector(".loader");
 
 input.addEventListener("change", function (event) {
   const files = event.target.files;
@@ -78,6 +79,8 @@ function convertToImage(element, i) {
     // container.append(canvas);
 
     container.append(Photo(link.href));
+    loader.classList.add("hidden");
+
     // canvas.toBlob((blob) => {
     //   let url = URL.createObjectURL(blob); // Create a Blob URL
 
@@ -99,7 +102,9 @@ function convertToImage(element, i) {
 const saveBtn = document.getElementById("saveBtn");
 
 saveBtn.addEventListener("click", (e) => {
+  saveBtn.disabled = true;
   document.querySelector(".upload-container").classList.add("hidden");
+  loader.classList.remove("hidden");
   hidden_container.innerHTML = "";
   hidden_container.append(container.cloneNode(true));
   const _pages = hidden_container.querySelectorAll(".paper");
