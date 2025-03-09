@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Preview</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+
+    <script src="html2canvas.js"></script>
+    <script src="Sortable.min.js"></script>
+
+    <script src="script.js" defer></script>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(() => console.log("Service Worker Registered"))
+          .catch((err) => console.log("Service Worker Failed", err));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="upload-container">
+        <label for="file-upload" class="upload-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span>上傳</span>
+        </label>
+
+        <input
+          type="file"
+          class="hidden-input"
+          id="file-upload"
+          accept="image/*"
+          multiple
+        />
+      </div>
+
+      <div class="paper-container">
+        <!-- <div class="paper">
+          <div class="item"><img class="image" src="..." /></div>
+        </div> -->
+      </div>
+    </div>
+    <button id="saveBtn" class="hidden">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            opacity="0.5"
+            d="M3 15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15"
+            stroke="#ffffff"
+            stroke-width="2.184"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M12 3V16M12 16L16 11.625M12 16L8 11.625"
+            stroke="#ffffff"
+            stroke-width="2.184"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </svg>
+      <span>下載</span>
+    </button>
+
+    <div id="hidden-paper-container"></div>
+
+    <script></script>
+  </body>
+</html>

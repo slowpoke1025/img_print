@@ -1,0 +1,226 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #ffffff;
+}
+
+.container {
+    display: grid;
+    gap: 2rem;
+    margin: 1rem auto;
+    max-width: 210mm;
+}
+
+/* Upload Button Section */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    /* margin-bottom: 1rem; */
+}
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #5b86e5, #36d1dc);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(54, 209, 220, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 150px;
+}
+
+.upload-container.hidden {
+    display: none;
+}
+
+.upload-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(54, 209, 220, 0.4);
+}
+
+.upload-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(54, 209, 220, 0.3);
+}
+
+.hidden-input {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+/* Paper/Canvas Section */
+.paper-container {
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.paper {
+    aspect-ratio: 210/297;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 8px;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
+    overflow: hidden;
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    /* border-radius: 6px; */
+    /* transition: border 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); */
+    /* background-color: #ffffff; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.item:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    transform: rotate(1deg);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Item states for drag and drop */
+.chosenClass {
+    border: 3px solid #4e62ff;
+    box-shadow: 0 12px 24px rgba(78, 93, 255, 0.3);
+    transform: scale(1.02) rotate(1deg);
+    z-index: 100;
+    cursor: grabbing;
+    filter: brightness(1.05);
+}
+
+.swapClass {
+    border: 3px solid #7c4dff;
+    box-shadow: 0 4px 12px rgba(111, 66, 255, 0.25);
+    transform: scale(1.01);
+    transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: saturate(1.2);
+}
+
+/* Save Button */
+#saveBtn {
+    background: linear-gradient(135deg, #36d1dc, #5b86e5);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(91, 134, 229, 0.3);
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    display: flex;
+    min-width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 150px;
+}
+
+#saveBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(91, 134, 229, 0.4);
+}
+
+#saveBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(91, 134, 229, 0.3);
+}
+
+#saveBtn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91, 134, 229, 0.25), 0 4px 15px rgba(91, 134, 229, 0.3);
+}
+
+#saveBtn:disabled {
+    background: linear-gradient(135deg, #c5d8e1, #b5c3d8);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+#saveBtn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+#hidden-paper-container {
+    --WIDTH: 210mm;
+    /* padding: 2rem; */
+    position: absolute;
+    left: calc(-1 * var(--WIDTH));
+    width: var(--WIDTH);
+
+    & .paper {
+        gap: 2rem;
+        padding: 2rem;
+    }
+}
+
+
+#saveBtn.hidden {
+    display: none;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .paper {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .upload-button,
+    #saveBtn {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+
+}
