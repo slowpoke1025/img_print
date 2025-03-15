@@ -24,7 +24,7 @@
   <body>
     <div class="container">
       <div class="upload-container">
-        <label for="file-upload" class="upload-button">
+        <label for="file-upload" class="button upload-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -43,6 +43,26 @@
           <span>上傳</span>
         </label>
 
+        <label class="button restart-btn hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z"
+            ></path>
+          </svg>
+          <span>再做一張</span>
+        </label>
+
         <input
           type="file"
           class="hidden-input"
@@ -50,6 +70,43 @@
           accept="image/*"
           multiple
         />
+        <div class="reset hidden">
+          <img class="filter" src="./reset.png" alt="" />
+        </div>
+
+        <div class="save hidden">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                opacity="0.5"
+                d="M3 15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15"
+                stroke="#ffffff"
+                stroke-width="2.184"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M12 3V16M12 16L16 11.625M12 16L8 11.625"
+                stroke="#ffffff"
+                stroke-width="2.184"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </div>
       </div>
 
       <div class="paper-container">
@@ -58,7 +115,7 @@
         </div> -->
       </div>
     </div>
-    <button id="saveBtn" class="hidden">
+    <!-- <button id="saveBtn" class="hidden">
       <svg
         width="24"
         height="24"
@@ -90,11 +147,9 @@
           ></path>
         </g>
       </svg>
-      <span>下載</span>
+      <span>下載</span> -->
     </button>
     <div class="loader hidden"></div>
     <div id="hidden-paper-container"></div>
-
-    <script></script>
   </body>
 </html>

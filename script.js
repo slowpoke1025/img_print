@@ -1,4 +1,4 @@
-const arr = [];
+let arr = [];
 const NUM = 8;
 let paper, hidden_paper;
 const papers = document.getElementsByClassName("paper");
@@ -8,10 +8,56 @@ const hidden_container = document.querySelector("#hidden-paper-container");
 const input = document.getElementById("file-upload");
 const loader = document.querySelector(".loader");
 
+// const remove = document.querySelector(".remove");
+const reset = document.querySelector(".reset");
+const restart = document.querySelector(".restart-btn");
+const upload = document.querySelector(".upload-btn");
+const save = document.querySelector(".save");
+
+reset.addEventListener("click", (e) => {
+  container.innerHTML = "";
+  save.classList.add("hidden");
+  reset.classList.add("hidden");
+  arr = [];
+});
+
+restart.addEventListener("click", (e) => {
+  container.innerHTML = "";
+  upload.classList.remove("hidden");
+  restart.classList.add("hidden");
+  reset.classList.add("hidden");
+
+  arr = [];
+});
+// Sortable.create(remove, {
+//   group: {
+//     name: "page",
+//     // pull: "clone", // To clone: set pull to 'clone'
+//   },
+//   filter: ".filter",
+//   // ghostClass: "hidden",
+//   // disabled: true,
+//   // ghostClass: "hidden",
+//   sort: false,
+//   onAdd(e) {
+//     e.item.remove();
+//     console.log("add", e);
+//   },
+// });
+
+// remove.addEventListener("dragenter", (e) => {
+//   remove.classList.add("enter");
+// });
+
+// remove.addEventListener("dragleave", (e) => {
+//   remove.classList.remove("enter");
+// });
+
 input.addEventListener("change", function (event) {
   const files = event.target.files;
   if (files.length > 0) {
-    saveBtn.classList.remove("hidden");
+    save.classList.remove("hidden");
+    reset.classList.remove("hidden");
   }
   [...files]
     .sort((a, b) => a.lastModified - b.lastModified)
@@ -99,12 +145,13 @@ function convertToImage(element, i) {
   });
 }
 
-const saveBtn = document.getElementById("saveBtn");
-
-saveBtn.addEventListener("click", (e) => {
-  saveBtn.disabled = true;
-  document.querySelector(".upload-container").classList.add("hidden");
+save.addEventListener("click", (e) => {
+  save.disabled = true;
+  upload.classList.add("hidden");
   loader.classList.remove("hidden");
+  restart.classList.remove("hidden");
+  reset.classList.add("hidden");
+
   hidden_container.innerHTML = "";
   hidden_container.append(container.cloneNode(true));
   const _pages = hidden_container.querySelectorAll(".paper");
@@ -112,16 +159,44 @@ saveBtn.addEventListener("click", (e) => {
   _pages.forEach((_page, i) => {
     convertToImage(_page, i);
   });
-  saveBtn.classList.add("hidden");
+  save.classList.add("hidden");
 });
 
-function sortable(element, group) {
+function sortable(element, group, swap = true) {
   Sortable.create(element, {
-    group, // 本章節新增 共享區塊
+    group: {
+      name: group,
+      // pull: "clone",
+    }, // 本章節新增 共享區塊
+    filter: ".filter",
+
     animation: 150,
-    swap: true,
+    swap: swap,
     swapClass: "swapClass",
     chosenClass: "chosenClass", // Add swap effect
+    ghostClass: "ghostClass",
+    dragClass: "dragClass", // Special styling during drag operation
+
+    // ghostClass: "hidden",
+
+    onMove: function (evt) {
+      // if (evt.to.id === "trash") {
+      //   this.option("swap", false);
+      //   remove.classList.add("enter");
+      //   return 1;
+      // } else {
+      //   Sortable.get(evt.to).option("swap", true);
+      //   remove.classList.remove("enter");
+      // }
+    },
+
+    onEnd: (e) => {
+      // remove.classList.remove("enter");
+      // const paper = e.from;
+      // if (paper.children.length === 0) {
+      //   paper.remove();
+      // }
+    },
   });
 }
 
@@ -129,5 +204,5 @@ document.addEventListener("contextmenu", (e) => e.preventDefault());
 
 function getDate() {
   const date = new Date();
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getMinutes()}-${date.getSeconds()}`;
 }

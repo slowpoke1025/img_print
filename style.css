@@ -16,18 +16,20 @@ body {
     gap: 2rem;
     margin: 1rem auto;
     max-width: 210mm;
+    position: relative;
 }
 
 /* Upload Button Section */
 .upload-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: center;
     gap: 12px;
     /* margin-bottom: 1rem; */
 }
 
-.upload-button {
+.button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,11 +44,13 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
-    max-width: 150px;
+    max-width: 100%;
 }
 
-.upload-container.hidden {
-    display: none;
+
+.upload-btn {
+    /* margin-right: auto; */
+    flex: 1;
 }
 
 .upload-button:hover {
@@ -95,6 +99,8 @@ body {
     max-width: 100%;
     max-height: 100%;
     overflow: hidden;
+    /* transform: scale(1); */
+    /* transform-origin: center; */
     /* border-radius: 6px; */
     /* transition: border 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); */
     /* background-color: #ffffff; */
@@ -103,7 +109,7 @@ body {
 
 .item:hover {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-    transform: rotate(1deg);
+    /* transform: rotate(1deg); */
 }
 
 .image {
@@ -114,21 +120,33 @@ body {
 }
 
 /* Item states for drag and drop */
+
+
+.dragClass {
+    /* transform: scale(0.8); */
+
+}
+
 .chosenClass {
-    border: 3px solid #4e62ff;
+    border: 3px solid #e9dc32;
     box-shadow: 0 12px 24px rgba(78, 93, 255, 0.3);
-    transform: scale(1.02) rotate(1deg);
+    transform: rotate(1deg);
     z-index: 100;
     cursor: grabbing;
     filter: brightness(1.05);
 }
 
+.ghostClass {
+    border: none;
+    filter: brightness(.4);
+}
+
+
 .swapClass {
-    border: 3px solid #7c4dff;
+    border: 3px solid #30eac5;
     box-shadow: 0 4px 12px rgba(111, 66, 255, 0.25);
-    transform: scale(1.01);
-    transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
-    filter: saturate(1.2);
+    /* transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); */
+    /* filter: saturate(1.2); */
 }
 
 /* Save Button */
@@ -257,5 +275,47 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+.reset,
+.save {
+    color: #fff;
+    /* position: absolute; */
+    /* background-color: rgb(240, 62, 62); */
+    /* right: 5px; */
+    /* top: 5px; */
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    transition: all .2s;
+    overflow: hidden;
+    outline: 0px solid #fff;
+    outline-offset: 3px;
+    padding: 8px;
+
+
+    &:hover,
+    &.enter {
+        /* top: -5px; */
+        outline: 3px solid #fff;
+    }
+
+}
+
+.reset {
+    background-color: #e9dc32;
+
+}
+
+.save {
+    background-color: #30eac5;
+
+}
+
+.reset img {
+    width: 100%;
+    height: 100%;
+
 }
